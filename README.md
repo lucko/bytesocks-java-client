@@ -12,7 +12,7 @@ Artifact: `me.lucko:bytesocks-java-client:1.0-SNAPSHOT`
 
 ```java
 // Create a client
-String host = "bytebin.example.com";
+String host = "bytesocks.example.com";
 String userAgent = "github.com/example/your-application";
 
 BytesocksClient client = BytesocksClientFactory.newClient(host, userAgent);
