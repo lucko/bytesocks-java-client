@@ -16,14 +16,11 @@ String host = "bytesocks.example.com";
 String userAgent = "github.com/example/your-application";
 
 BytesocksClient client = BytesocksClientFactory.newClient(host, userAgent);
-if (client == null) {
-    throw new UnsupportedOperationException("Requires Java 11");
-}
 
 // create a new socket connection
 BytesocksClient.Listener listener = new BytesocksClient.Listener() {
     @Override
-    public void onText(CharSequence data) {
+    public void onText(String data) {
         System.out.println("Got data from channel: " + data);
     }
 };

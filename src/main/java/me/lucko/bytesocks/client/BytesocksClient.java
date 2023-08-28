@@ -20,14 +20,23 @@
 
 package me.lucko.bytesocks.client;
 
-import java.util.concurrent.CompletableFuture;
-
 /**
  * A client that can interact with bytesocks.
  *
  * @see <a href="https://github.com/lucko/bytesocks">https://github.com/lucko/bytesocks</a>
  */
 public interface BytesocksClient {
+
+    /**
+     * Creates a new {@link BytesocksClient}.
+     *
+     * @param host the host
+     * @param userAgent the user agent
+     * @return the client
+     */
+    static BytesocksClient create(String host, String userAgent) {
+        return new BytesocksClientImpl(host, userAgent);
+    }
 
     /**
      * Creates a new bytesocks channel and returns a socket connected to it.
@@ -58,7 +67,7 @@ public interface BytesocksClient {
          *
          * @return the id of the channel
          */
-        String getChannelId();
+        String channelId();
 
         /**
          * Gets if the socket is open.
@@ -71,9 +80,8 @@ public interface BytesocksClient {
          * Sends a message to the channel using the socket.
          *
          * @param msg the message to send
-         * @return a future to encapsulate the progress of sending the message
          */
-        CompletableFuture<?> send(CharSequence msg);
+        void send(String msg);
 
         /**
          * Closes the socket.
@@ -93,7 +101,7 @@ public interface BytesocksClient {
 
         default void onError(Throwable error) {}
 
-        default void onText(CharSequence data) {}
+        default void onText(String data) {}
 
         default void onClose(int statusCode, String reason) {}
     }
