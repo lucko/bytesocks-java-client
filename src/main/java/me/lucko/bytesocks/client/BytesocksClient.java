@@ -84,12 +84,20 @@ public interface BytesocksClient {
         void send(String msg);
 
         /**
-         * Closes the socket.
+         * Closes the socket connection.
          *
          * @param statusCode the status code
          * @param reason the reason
          */
         void close(int statusCode, String reason);
+
+        /**
+         * Sends a message to gracefully close the socket connection.
+         *
+         * @param statusCode the status code
+         * @param reason the reason
+         */
+        void closeGracefully(int statusCode, String reason);
     }
 
     /**

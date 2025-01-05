@@ -138,9 +138,13 @@ class BytesocksClientImpl implements BytesocksClient {
 
         @Override
         public void close(int statusCode, String reason) {
+            this.ws.closeConnection(statusCode, reason);
+        }
+
+        @Override
+        public void closeGracefully(int statusCode, String reason) {
             this.ws.close(statusCode, reason);
         }
     }
-
 
 }
