@@ -106,6 +106,7 @@ class BytesocksClientImpl implements BytesocksClient {
                 listener.onError(ex);
             }
         };
+        socket.setDaemon(true);
         socket.connectBlocking();
 
         return new SocketImpl(channelId, socket);
