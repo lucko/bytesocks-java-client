@@ -35,7 +35,18 @@ public interface BytesocksClient {
      * @return the client
      */
     static BytesocksClient create(String host, String userAgent) {
-        return new BytesocksClientImpl(host, userAgent);
+        return new BytesocksClientJws(host, userAgent, true);
+    }
+
+    /**
+     * Creates a new {@link BytesocksClient}.
+     *
+     * @param host the host
+     * @param userAgent the user agent
+     * @return the client
+     */
+    static BytesocksClient createInsecure(String host, String userAgent) {
+        return new BytesocksClientJws(host, userAgent, false);
     }
 
     /**

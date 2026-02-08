@@ -31,9 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Basic implementation of {@link BytesocksClient}.
+ * Implementation of {@link BytesocksClient} using the org.java_websocket library.
  */
-class BytesocksClientImpl implements BytesocksClient {
+class BytesocksClientJws implements BytesocksClient {
 
     /* The bytesocks urls */
     private final String httpUrl;
@@ -42,9 +42,9 @@ class BytesocksClientImpl implements BytesocksClient {
     /** The client user agent */
     private final String userAgent;
 
-    BytesocksClientImpl(String host, String userAgent) {
-        this.httpUrl = "https://" + host + "/";
-        this.wsUrl = "wss://" + host + "/";
+    BytesocksClientJws(String host, String userAgent, boolean secure) {
+        this.httpUrl = (secure ? "https://" : "http://") + host + "/";
+        this.wsUrl = (secure ? "wss://" : "ws://") + host + "/";
         this.userAgent = userAgent;
     }
 

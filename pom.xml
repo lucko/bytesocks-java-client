@@ -5,28 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.lucko</groupId>
-    <artifactId>bytesocks-java-client</artifactId>
+    <artifactId>bytesocks-java-client-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>bytesocks-java-client</module>
+        <module>bytesocks-java-client-j11</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.java-websocket</groupId>
-            <artifactId>Java-WebSocket</artifactId>
-            <version>1.6.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -36,6 +26,11 @@
                 <version>5.10.0</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.java-websocket</groupId>
+                <artifactId>Java-WebSocket</artifactId>
+                <version>1.6.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -49,6 +44,19 @@
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.execution.parallel.enabled = true
+                            junit.jupiter.execution.parallel.config.strategy = fixed
+                            junit.jupiter.execution.parallel.config.fixed.parallelism = 1000
+                        </configurationParameters>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>
@@ -102,12 +110,12 @@
 
             <distributionManagement>
                 <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <id>luck-snapshots</id>
+                    <url>https://nexus.lucko.me/repository/maven-snapshots/</url>
                 </snapshotRepository>
                 <repository>
                     <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
         </profile>

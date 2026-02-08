@@ -2,7 +2,6 @@
 
 Java client library for [bytesocks](https://github.com/lucko/bytesocks).
 
-
 Repo: `https://oss.sonatype.org/content/repositories/snapshots/`   
 Artifact: `me.lucko:bytesocks-java-client:1.0-SNAPSHOT`
 
